@@ -14,6 +14,7 @@ type AppConfig struct {
 		ClientId string
 		ClientSecret string
 	}
+	OpenWeatherApiKey string
 }
 
 func LoadEnv(path string) {
@@ -24,6 +25,8 @@ func LoadEnv(path string) {
 
 	App.Spotify.ClientId = loadString("SPOTIFY_CLIENT_ID", nil)
 	App.Spotify.ClientSecret = loadString("SPOTIFY_CLIENT_SECRET", nil)
+
+	App.OpenWeatherApiKey = loadString("OPEN_WEATHER_API_KEY", nil)
 }
 
 func RootPath() string {

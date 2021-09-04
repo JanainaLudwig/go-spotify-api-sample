@@ -7,9 +7,10 @@ import (
 
 type AppError struct {
 	Message string `json:"message"`
-	Status int `json:"status"`
-	File string `json:"-"`
-	Line int `json:"-"`
+	Code    string `json:"code,omitempty"`
+	Status  int    `json:"status"`
+	File    string `json:"-"`
+	Line    int    `json:"-"`
 }
 
 func NewAppError(err AppError) *AppError {

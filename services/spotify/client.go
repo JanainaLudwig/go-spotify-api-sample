@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"go-api-template/core"
 	"io"
-	"log"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -83,7 +82,6 @@ type RequestError struct {
 }
 
 func (c *Client) GetRequest(ctx context.Context, uri string, data interface{}) error {
-	log.Println(apiBaseUri+uri)
 	request, err := http.NewRequestWithContext(ctx, http.MethodGet, apiBaseUri+uri, nil)
 	if err != nil {
 		return core.NewAppError(core.AppError{
