@@ -15,10 +15,11 @@ type WeatherResponse struct {
 
 type GetWeatherInput struct {
 	City string
-	Coordinates *struct{
-		Lat string
-		Long string
-	}
+	Coordinates *CoordinatesInput
+}
+type CoordinatesInput struct {
+	Lat string
+	Long string
 }
 
 func (g *GetWeatherInput) Validate() error {

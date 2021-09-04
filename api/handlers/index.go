@@ -21,10 +21,23 @@ type weatherTrackResponse struct {
 }
 
 func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	city := r.URL.Query().Get("city")
+	lat := r.URL.Query().Get("lat")
+	long := r.URL.Query().Get("long")
+
+	input := openweather.GetWeatherInput{
+		City: city,
+	}
+
+	if lat != "" && long != "" {
+		input.Coordinates = &openweather.CoordinatesInput{
+			Lat:  lat,
+			Long: long,
+		}
+	}
+
 	weatherClient := openweather.NewClient(config.App.OpenWeatherApiKey)
-	weather, err := weatherClient.GetWeather(r.Context(), openweather.GetWeatherInput{
-		City:        "New York",
-	})
+	weather, err := weatherClient.GetWeather(r.Context(), input)
 	if err != nil {
 		sendErrorResponse(w, err)
 		return
